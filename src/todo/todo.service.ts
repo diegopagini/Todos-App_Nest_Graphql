@@ -76,7 +76,7 @@ export class TodoService {
   delete(id: number): boolean {
     const todo = this.findOne(id);
 
-    this.todos = this.todos.filter((t: Todo) => t.id !== id);
+    if (todo) this.todos = this.todos.filter((t: Todo) => t.id !== id);
 
     return true;
   }
