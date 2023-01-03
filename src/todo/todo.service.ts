@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { CreateTodoInput } from './dto/inputs/create-todo.input';
 import { Todo } from './entity/todo.entity';
 
 @Injectable()
@@ -39,6 +40,17 @@ export class TodoService {
     const todo = this.todos.find((todo) => todo.id === id);
 
     if (!todo) throw new NotFoundException(`Todo with id ${id} not found.`);
+
+    return todo;
+  }
+
+  create({ description }: CreateTodoInput): Todo {
+    const todo = new Todo();
+    todo.description = description;
+    todo.done = false;
+    todo.id = Math.max(...this.todos.map((t: Todo) => t.id), 0) + 1; // To get the highest id from the list and one to it.
+
+    this.todos.push(todo);
 
     return todo;
   }

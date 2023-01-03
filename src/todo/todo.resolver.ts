@@ -1,5 +1,6 @@
-import { Args, Int, Query, Resolver } from '@nestjs/graphql';
+import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
 
+import { CreateTodoInput } from './dto/inputs/create-todo.input';
 import { Todo } from './entity/todo.entity';
 import { TodoService } from './todo.service';
 
@@ -28,7 +29,15 @@ export class TodoResolver {
     return this.todoService.findOne(id);
   }
 
-  createTodo() {}
+  /**
+   * Method to create a new todo.
+   * @param {CreateTodoInput} createTodoInput
+   * @returns Todo
+   */
+  @Mutation(() => Todo, { name: 'createTodo' })
+  createTodo(@Args('createTodoInput') createTodoInput: CreateTodoInput): Todo {
+    return this.todoService.create(createTodoInput);
+  }
 
   updateTodo() {}
 
