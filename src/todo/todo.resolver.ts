@@ -59,4 +59,33 @@ export class TodoResolver {
   removeTodo(@Args('id', { type: () => Int }) id: number) {
     return this.todoService.delete(id);
   }
+
+  // Agregations
+
+  /**
+   * Method to get the length of the total of todos.
+   * @returns number
+   */
+  @Query(() => Int, { name: 'totalTodos' })
+  totalTodos(): number {
+    return this.todoService.totalTodos;
+  }
+
+  /**
+   * Method to get the length of the completed of todos.
+   * @returns number
+   */
+  @Query(() => Int, { name: 'completedTodos' })
+  completedTodos(): number {
+    return this.todoService.completedTodos;
+  }
+
+  /**
+   * Method to get the length of the pending of todos.
+   * @returns number
+   */
+  @Query(() => Int, { name: 'pendingTodos' })
+  pendingTodos(): number {
+    return this.todoService.pendingTodos;
+  }
 }

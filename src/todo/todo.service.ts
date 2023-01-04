@@ -21,7 +21,33 @@ export class TodoService {
       description: 'Piedra del Poder',
       done: true,
     },
+    {
+      id: 4,
+      description: 'Piedra del Tiempo',
+      done: true,
+    },
   ];
+
+  /**
+   * Getter to get the total of todos.
+   */
+  get totalTodos(): number {
+    return this.todos.length || 0;
+  }
+
+  /**
+   * Getter to get the total of the completed todos.
+   */
+  get completedTodos(): number {
+    return this.todos.filter((el: Todo) => el.done === true).length || 0;
+  }
+
+  /**
+   * Getter to get the total of the pending todos.
+   */
+  get pendingTodos(): number {
+    return this.todos.filter((el: Todo) => el.done === false).length || 0;
+  }
 
   /**
    * Method to get all the todos.

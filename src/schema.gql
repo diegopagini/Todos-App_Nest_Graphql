@@ -17,6 +17,9 @@ type Query {
   randomFromZeroTo(to: Int): Int!
   todos(status: Boolean): [Todo!]!
   todo(id: Int!): Todo!
+  totalTodos: Int!
+  completedTodos: Int!
+  pendingTodos: Int!
 }
 
 type Mutation {
